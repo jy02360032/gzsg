@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.webset.mapper.InteractionReplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="interactionReplyMap" type="net.webset.entity.InteractionReply">
+        <id column="id" property="id" />
+        <result column="userid" property="userid" />
+        <result column="interactionid" property="interactionid" />
+        <result column="reply" property="reply" />
+        <result column="createtime" property="createtime" />
+        <result column="state" property="state" />
+    </resultMap>
+
+</mapper>

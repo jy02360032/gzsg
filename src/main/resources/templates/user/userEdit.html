@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>用户信息管理</title>
+<link rel="stylesheet" th:href="@{/js/plugin/bootstrap/dist/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/js/plugin/bootstraptable/dist/bootstrap-table.css}" />
+</head>
+<body>
+    <div th:replace="/plugn/pageCompent::showModal"></div>
+	<form class="form-horizontal"  method="post" id="userInfoEdit" th:object="${user}" style="width: 90%">
+		<fieldset>
+			<legend class="">用户管理</legend>
+			<input type="hidden" name="id" th:value="*{id}" >
+			<div class="form-group" >
+				<label for="username" class="col-sm-2 control-label">用户名</label> 
+                <input type="text" class="form-control" style="width: 50%" name="username"  id="username"
+                    th:value="*{username}" placeholder="请输入登录名" th:field="*{username}" />
+			</div>
+
+            <div class="form-group" >
+                <label class="col-sm-2 control-label" ></label> 
+                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('username')}" >
+                    <a class="close" data-dismiss="alert">×</a>
+                    <strong>错误信息!</strong>
+                    <p th:errors="*{username}" >This is a fatal error.</p>
+                </div>
+            </div>
+            
+			<div class="form-group">
+				<label for="name" class="col-sm-2 control-label"> 姓名</label> 
+				<input type="text" class="form-control" name="name" style="width: 50%" id="name"
+					value="" th:value="*{name}" placeholder="请输入姓名" />
+			</div>
+
+            <div class="form-group" >
+                <label class="col-sm-2 control-label"></label> 
+                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('name')}" >
+                    <a class="close" data-dismiss="alert">×</a>
+                    <strong>错误信息!</strong>
+                    <p th:errors="*{name}" >This is a fatal error.</p>
+                </div>
+            </div>
+			
+			<div class="form-group">
+				<label for="tel" class="col-sm-2 control-label"> 联系方式</label> 
+				<input type="text" th:value="*{tel}" class="form-control" name="tel" style="width: 50%" id="tel"
+					value="" placeholder="请输入电话号码" />
+			</div>
+
+            <div class="form-group" >
+                <label class="col-sm-2 control-label"></label> 
+                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('tel')}" >
+                    <a class="close" data-dismiss="alert">×</a>
+                    <strong>错误信息!</strong>
+                    <p th:errors="*{tel}" >This is a fatal error.</p>
+                </div>
+            </div>
+            
+            <div class="form-group">
+				<label for="mail" class="col-sm-2 control-label">邮箱</label> 
+				<input type="text" th:value="*{mail}" class="form-control" name="mail" style="width: 50%" id="mail"
+					value="" placeholder="请输入邮箱" />
+			</div>
+
+            <div class="form-group" >
+                <label class="col-sm-2 control-label"></label> 
+                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('mail')}" >
+                    <a class="close" data-dismiss="alert">×</a>
+                    <strong>错误信息!</strong>
+                    <p th:errors="*{mail}" >This is a fatal error.</p>
+                </div>
+            </div>
+            
+
+			<div class="form-group" id="isPassDiv">
+				<div class="col-sm-offset-2 col-sm-10">
+		            <div class="checkbox">
+		                <label>
+		                    <input type="checkbox" id="isPass">是否重置密码？
+		                </label>
+		            </div>
+		        </div>
+			</div>
+			<div id="passType" style="display: none;">
+				<div class="form-group" >
+					<label for="password" class="col-sm-2 control-label"> 密码</label> 
+					<input type="password" class="form-control" name="password" style="width: 50%" id="password"
+						value="" placeholder="请输入密码" />
+				</div>
+				
+				<div class="form-group" >
+					<label for="repassword" class="col-sm-2 control-label"> 重复密码</label> 
+					<input type="password" class="form-control" name="repassword" style="width: 50%" id="repassword"
+						value="" placeholder="请输入密码" />
+				</div>
+			</div>
+            <div class="form-group" >
+                <label class="col-sm-2 control-label"></label> 
+                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('password')}" >
+                    <a class="close" data-dismiss="alert">×</a>
+                    <strong>错误信息!</strong>
+                    <p th:errors="*{password}" >This is a fatal error.</p>
+                </div>
+            </div>
+			<input type="hidden" value="" id="userenable" th:value="${enable}">
+			<div class="form-group" >
+				<label for="enable" class="col-sm-2 control-label"> 用户状态</label> 
+				<select id="enable" name="enable" class="selectpicker show-tick form-control"  
+					data-live-search="true" style="width: 50%">
+					<option value="启用">启用</option>
+					<option value="禁用">禁用</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">角色信息</label> 
+				<div id="roles">
+					<div th:unless="*{#lists.isEmpty(userRoles)}">
+						<div class='alert alert-info' style='width: 7%;float: left;' th:each="obj,iterStat:*{userRoles}">
+							<a class='close' data-dismiss='alert'>×</a>
+							<input type='hidden' name='roles'  th:value="${obj.roleid}">
+							<p th:text="${obj.role.text}"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group" >
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-success"  id="submit">保存</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-primary"  id="cancel">取消</button>
+				</div>
+			</div>
+			<legend class="">请设置用户的角色信息</legend>
+			<div class="form-group">
+					<label class="col-sm-2"></label>
+                    <input type="text" class="col-sm-2 form-control" id="text"  style="width: 20%;">
+                    <input type="button" class="btn btn-primary col-sm-2"  id="btn_query"  style="width: 5%;" value="查询">
+		    </div>
+			    <div class="form-group">
+			    	<label class="col-sm-2"></label>
+			    	<!-- <div  class="col-sm-2"></div> -->
+			    	<div  class="col-sm-5"  style="width: 50%;">
+			    		<table id="tb_roles"></table>
+			    	</div>
+			    </div>
+		</fieldset>
+		
+	</form>
+</body>
+<script th:src="@{/js/plugin/jquery.js}"></script>
+<script th:src="@{/js/plugin/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugin/bootstraptable/dist/bootstrap-table.js}"></script>
+<script th:src="@{/js/plugin/bootstraptable/dist/locale/bootstrap-table-zh-CN.min.js}"></script>
+<script th:src="@{/js/native/native.js}"></script>
+<script th:src="@{/js/native/user/userEdit.js}"></script>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.webset.mapper.TestpaperMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="testpaperMap" type="net.webset.entity.Testpaper">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="author" property="author" />
+        <result column="createdate" property="createdate" />
+        <result column="modifydate" property="modifydate" />
+        <result column="istop" property="istop" />
+        <result column="isdel" property="isdel" />
+        <result column="description" property="description" />
+    </resultMap>
+
+</mapper>

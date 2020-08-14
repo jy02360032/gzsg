@@ -1,0 +1,95 @@
+#spring 配置
+spring: 
+  #国际化设置
+  messages: 
+    #国际化文件
+    basename: i18n/message_zh_CN
+    #编码格式
+    encoding: UTF-8
+  #数据库源配置 
+  datasource: 
+    url: jdbc:mysql://192.168.0.110:3306/gzsg?serverTimezone=GMT%2B8&&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+#    url: jdbc:mysql://127.0.0.1:3307/gzsg?serverTimezone=GMT%2B8&&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #spring session配置
+  session: 
+    #配置类型：redis
+    store-type: redis
+    #session 失效时间
+    timeout: 600
+  #Http字符集配置
+  http: 
+    encoding: 
+      charset: UTF-8
+      enabled: true
+      force: true
+  #redis配置
+  redis: 
+    # Redis数据库索引（默认为0） 
+    database: 0  
+    # Redis服务器地址  
+#    host: 192.168.0.110
+    host: 127.0.0.1
+    # Redis服务器连接端口  
+    port: 6379
+    # Redis服务器连接密码（默认为空）  
+    password:  
+    # 连接超时时间（毫秒）  
+    timeout: 1000 
+    # 如果使用的jedis 则将lettuce改成jedis即可
+    lettuce: 
+      # 连接池设置
+      pool: 
+        # 连接池最大连接数（使用负值表示没有限制）  
+        max-active: 200  
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）  
+        max-wait: -1  
+        # 连接池中的最大空闲连接  
+        max-idle: 10
+        # 连接池中的最小空闲连接  
+        min-idle: 0
+  #thymeleaf
+  thymeleaf:
+    #开发过程中关闭缓存，生产环境设置为true
+    cache: false
+    #字符集编码统一为utf-8
+    encoding: UTF-8
+   
+#swagger
+swagger:
+  enabled: true
+  base-package: net.webset.api
+  docket:
+    userApi:
+      title: 用户管理文档
+      description: 对用户的基础信息进行增删改查
+      base-path: /userManager/*API*
+    roleApi:
+      title: 角色管理文档
+      description: 对角色的基础信息进行增删改查
+      base-path: /authManager/*API*
+
+    
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: net.webset.entity
+  type-enums-package: net.webset.entity.enums
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      lazy-loading-enabled: true
+      aggressive-lazy-loading: false
+  
+#自定义配置
+config: 
+  code: 
+    image: 
+      length: 1 
+      width: 50 

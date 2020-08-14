@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.webset.mapper.RoleMapper">
+    <resultMap id="roleMap" type="net.webset.entity.Role">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="text" property="text" />
+		<collection property="roleMenus" ofType="net.webset.entity.RoleMenu" 
+			select="net.webset.mapper.RoleMenuMapper.findByRoleID" column="id" />
+    </resultMap>
+</mapper>

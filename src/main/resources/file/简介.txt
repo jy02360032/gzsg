@@ -1,0 +1,8 @@
+spring-data-commons
+common-lang3 工具类
+ommons-pool2  是Apache下一个开源的公共资源池。我们可以根据它来快速的建立一个自己的对象池。
+spring-boot-configuration-processor
+
+
+
+RbacServiceImpl.java findAuthPromission() 设置用户权限到session

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.webset.mapper.LendMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="lendMap" type="net.webset.entity.Lend">
+        <id column="id" property="id" />
+        <result column="bookid" property="bookid" />
+        <result column="lendtime" property="lendtime" />
+        <result column="regaintime" property="regaintime" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+</mapper>

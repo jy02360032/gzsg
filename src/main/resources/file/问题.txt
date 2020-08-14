@@ -1,0 +1,13 @@
+1.springboot整合redis问题Failed to deserialize payload.  原因：启动新的项目时redis中key重复。 解决方式：redis-cli，清空redis中的key FLUSHALL(删除redis中所有的key) -> keys * 查看所用key。
+2.用户更新@Validated验证问题，原因：username标签为disable，更新时表单不提交username,所以有错误返回的页面中用户名为空。   解决方式：修改为update
+3.权限管理修改问题，点击修改权限信息不对菜单权限修改会报错500，		原因：不点击不会对返回菜单初始化，返回值为空。 	解决方式：后台判断传回的菜单列表是否为空，判断其修不修改。 修改RoleServiceImpl类中updateRole()方法，判断菜单参数是否为空。
+4.权限分配问题，给用户分配多个角色权限后，菜单会出现重复。   原因： AdminController中menu()菜单去重问题。  			解决方式：修改去重方式。
+5.用户信息修改问题，修改用户信息后，如果信息有误，返回页面后表单清空。 	原因：有误会只返回页面，没有返回用户信息。  			解决方式：UserManager.java类中userUpdate()方法中的hasErrors()返回信息，将用户与权限信息返回页面。      
+6.后台登录用户信息存储流程：UserServiceImpl.java中的loadUserByUsername()调用rbacService.java中的findAuthPromission(user.getUsername())方法，通过 session.setAttribute("authPromission", authPromission),存入session
+
+
+
+
+
+
+

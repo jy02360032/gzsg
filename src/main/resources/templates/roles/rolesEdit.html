@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>权限信息管理</title>
+<link rel="stylesheet" th:href="@{/js/plugin/bootstrap/dist/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div th:replace="/plugn/pageCompent::showModal"></div>
+	<div th:replace="/plugn/pageCompent::showChooseModal"></div>
+	<form class="form-horizontal"  method="post" id="rolesEdit" th:object="${role}">
+		<fieldset>
+			<legend class="">权限管理</legend>
+			<div class="row" >
+				<div class="col-sm-6">
+					<div class="form-group">
+						<input type="hidden" name="id" th:value="*{id}">
+						<label for="name" class="col-sm-2 control-label">权限代码</label> 
+						<input type="text"class="form-control" style="width: 60%" name="name"  id="name"
+							value="" th:value="*{name}" placeholder="请输入权限代码" />
+					</div>
+					
+					<div class="form-group" >
+		                <label class="col-sm-2 control-label" ></label> 
+		                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('name')}" >
+		                    <a class="close" data-dismiss="alert">×</a>
+		                    <strong>错误信息!</strong>
+		                    <p th:errors="*{name}" >This is a fatal error.</p>
+		                </div>
+		            </div>
+					
+					<div class="form-group">
+						<label for="text" class="col-sm-2 control-label">权限名称</label> 
+						<input type="text"class="form-control" style="width: 60%" name="text"  id="text"
+							value="" th:value="*{text}" placeholder="请输入权限名称" />
+					</div>
+					
+					<div class="form-group" >
+		                <label class="col-sm-2 control-label" ></label> 
+		                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('text')}" >
+		                    <a class="close" data-dismiss="alert">×</a>
+		                    <strong>错误信息!</strong>
+		                    <p th:errors="*{text}" >This is a fatal error.</p>
+		                </div>
+		            </div>
+		            
+		            <div class="form-group">
+						<label for="remark" class="col-sm-2 control-label">备注</label> 
+						<textarea class="form-control" style="width: 60%" name="remark"  id="remark"
+							placeholder="请输入名称">[[*{remark}]]</textarea>
+					</div>
+					
+					<div class="form-group" >
+		                <label class="col-sm-2 control-label" ></label> 
+		                <div class="alert alert-danger" style="width: 50%;float: left;" th:if="${#fields.hasErrors('remark')}" >
+		                    <a class="close" data-dismiss="alert">×</a>
+		                    <strong>错误信息!</strong>
+		                    <p th:errors="*{remark}" >This is a fatal error.</p>
+		                </div>
+		            </div>
+		            
+					<div class="form-group" >
+						<div class="col-sm-offset-2 col-sm-6">
+							<button type="submit" class="btn btn-success"  id="submit">保存</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="button" class="btn btn-primary"  id="cancel">取消</button>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+				<div class="col-sm-3">
+					<div id="tree" ></div>
+				</div>
+			</div>
+			<div id="checkedMenus">
+			
+			</div>
+			<div th:each="rm:*{roleMenus}" style="display: none;">
+				<input name="rm" th:value="${rm.menuid}" />
+			</div>
+			
+		</fieldset>
+	</form>
+</body>
+<script th:src="@{/js/plugin/jquery.js}"></script>
+<script th:src="@{/js/plugin/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugin/treeview/public/js/bootstrap-treeview.js}"></script>
+<script th:src="@{/js/native/native.js}"></script>
+<script th:src="@{/js/native/roles/rolesEdit.js}"></script>
+</html>

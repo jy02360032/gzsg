@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.webset.mapper.TestquestionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="testquestionMap" type="net.webset.entity.Testquestion">
+        <id column="id" property="id" />
+        <result column="subject" property="subject" />
+        <result column="optionA" property="optionA" />
+        <result column="optionB" property="optionB" />
+        <result column="optionC" property="optionC" />
+        <result column="optionD" property="optionD" />
+        <result column="rightkey" property="rightkey" />
+        <result column="pid" property="pid" />
+        <result column="isdel" property="isdel" />
+        <result column="score" property="score" />
+    </resultMap>
+
+</mapper>

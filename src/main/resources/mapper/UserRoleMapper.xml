@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.webset.mapper.UserRoleMapper">
+    <resultMap id="userRoleMap" type="net.webset.entity.UserRole">
+		<id column="id" property="id" />
+        <result column="userid" property="userid" />
+        <result column="roleid" property="roleid" />
+        <association property="role"  select="net.webset.mapper.RoleMapper.selectById" 
+			column="roleid" ></association>
+	</resultMap>
+
+	<select id="findByUserID" resultMap="userRoleMap">
+		select * from b_user_role where userid = #{id}
+	</select>
+</mapper>

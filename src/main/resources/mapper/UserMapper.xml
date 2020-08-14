@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.webset.mapper.UserMapper">
+    <resultMap id="userMap" type="net.webset.entity.User">
+        <id column="id" property="id" />
+		<collection property="userRoles" ofType="net.webset.entity.UserRole" 
+			select="net.webset.mapper.UserRoleMapper.findByUserID" column="id" />
+    </resultMap>
+</mapper>
